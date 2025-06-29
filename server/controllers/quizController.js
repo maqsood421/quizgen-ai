@@ -27,7 +27,10 @@ exports.generateQuiz = async (req, res) => {
 
     const reply = response.data.choices?.[0]?.message?.content;
     res.json({ aiResponse: reply || "No response from AI" });
-    if (reply) console.log(reply);
+
+    if (reply) {
+      console.log(parseMCQs(reply));
+    }
   } catch (err) {
     console.error("OpenRouter error:", err.response?.data || err.message);
     res.status(500).json({ error: "Failed to connect to OpenRouter API" });
